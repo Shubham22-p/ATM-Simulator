@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class User {
 
-    private Connection connections ;
+    private Connection connection ;
     private Scanner scanner;
 
+
+    }
 }
