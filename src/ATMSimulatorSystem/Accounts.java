@@ -3,6 +3,7 @@ package ATMSimulatorSystem;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
@@ -47,5 +48,18 @@ public class Accounts {
         throw new RuntimeException("Account Already Exist");
 
     }
-
+    public long getAccount_number(String email) {
+        String query = "SELECT account_number from Accounts WHERE email = ?";
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return resultSet.getLong("account_number");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        throw new RuntimeException("Account Number Doesn't Exist!");
+    }
 }
